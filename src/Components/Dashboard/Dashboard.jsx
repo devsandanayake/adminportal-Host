@@ -181,7 +181,7 @@ export default function Dashboard() {
   <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transform hover:-translate-y-1 transition duration-300">
     <div className="flex items-center justify-between">
       <div>
-        <h3 className="text-xl font-semibold text-gray-700">Advertisement</h3>
+        <h3 className="text-xl font-semibold text-gray-700">Destinations</h3>
         <p className="text-2xl font-bold text-gray-900">{dataState.data.length}</p>
       </div>
       <img src={adsicon} alt="Ads Icon" className="h-12 w-12 object-cover" />
@@ -205,7 +205,7 @@ export default function Dashboard() {
       <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transform hover:-translate-y-1 transition duration-300">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-xl font-semibold text-gray-700">Auction</h3>
+            <h3 className="text-xl font-semibold text-gray-700">Tickects</h3>
             <p className="text-2xl font-bold text-gray-900">$3,264</p>
           </div>
           <img src={adsicon3} alt="Auction Icon" className="h-12 w-12 object-cover" />
