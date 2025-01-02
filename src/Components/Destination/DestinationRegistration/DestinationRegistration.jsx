@@ -269,24 +269,28 @@ const DestinationRegistration = () => {
             className="border rounded px-4 py-2 w-full"
           >
             <option>Select</option>
-            <option value="EE_67612E84966D6">EE_67612E84966D6</option>
+            <option value="EB_67612E84966D6">SLT-Travel Sample Entity</option>
+            <option value="EE_6776DD67C2FB4">Zoology</option>
             {/* Add more options here if needed */}
           </select>
         </div>
 
+        {formData.owningEntityCode === 'EE_6776DD67C2FB4' && (
         <div className="space-y-2">
-            <label className="block font-medium">Owning Entity Branch Code:</label>
-            <select
-                name="owningEntityBranchCode"
-                value={formData.owningEntityBranchCode}
-                onChange={handleInputChange}
-                className="border rounded px-4 py-2 w-full"
-            >
-                <option>Select</option>
-                <option value="EB_67612E84966D6">EB_67612E84966D6</option>
-                {/* Add more options here if needed */}
-            </select>
+          <label className="block font-medium">Owning Entity Branch Code:</label>
+          <select
+            name="owningEntityBranchCode"
+            value={formData.owningEntityBranchCode}
+            onChange={handleInputChange}
+            className="border rounded px-4 py-2 w-full"
+          >
+            <option>Select</option>
+            <option value="EEB_6776DD67C53CD">Dehiwala</option>
+            <option value="EEB_6776DD67C5514">Yala-National Park</option>
+            {/* Add more options here if needed */}
+          </select>
         </div>
+      )}
 
         <div className="space-y-2">
           <label className="block font-medium">QR Base:</label>
