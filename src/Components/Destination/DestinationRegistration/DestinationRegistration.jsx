@@ -6,10 +6,58 @@ import { destinationPost } from "../../../actions/Destination/destinationAction"
 const DestinationRegistration = () => {
   const dispatch = useDispatch();
 
+    // Example categories and subcategories data
+    const categories = [
+        { id: "1", name: "Religious" },
+        { id: "2", name: "Classical" },
+        { id: "3", name: "Entertaining" },
+        { id: "4", name: "Sea" },
+        { id: "5", name: "Train" },
+        { id: "6", name: "Urban" },
+        { id: "7", name: "Historical" },
+        { id: "8", name: "Animal" },
+        { id: "9", name: "Nature" },
+        { id: "10", name: "Adventure" },
+        { id: "11", name: "Heritage" }
+      ];
+      
+      const subcategories = [
+        { id: "1", categoryId: "1", name: "Buddhism" },
+        { id: "2", categoryId: "1", name: "Hinduism" },
+        { id: "3", categoryId: "1", name: "Catholic" },
+        { id: "4", categoryId: "2", name: "Arts and Sculpture" },
+        { id: "5", categoryId: "2", name: "Architecture" },
+        { id: "6", categoryId: "2", name: "Cultural" },
+        { id: "7", categoryId: "2", name: "Educational" },
+        { id: "8", categoryId: "2", name: "Museums" },
+        { id: "9", categoryId: "3", name: "Carnival" },
+        { id: "10", categoryId: "4", name: "Beach" },
+        { id: "11", categoryId: "4", name: "Surfing" },
+        { id: "12", categoryId: "4", name: "Scuba Diving" },
+        { id: "13", categoryId: "4", name: "Watching Turtles" },
+        { id: "14", categoryId: "4", name: "Whales / Dolphins" },
+        { id: "15", categoryId: "5", name: "Train Ride" },
+        { id: "16", categoryId: "6", name: "Shopping Malls" },
+        { id: "17", categoryId: "6", name: "Street Food" },
+        { id: "18", categoryId: "7", name: "Ruins" },
+        { id: "19", categoryId: "7", name: "Memorials" },
+        { id: "20", categoryId: "8", name: "Wild Animals" },
+        { id: "21", categoryId: "8", name: "Birds" },
+        { id: "22", categoryId: "8", name: "Zoo" },
+        { id: "23", categoryId: "8", name: "Safari Park" },
+        { id: "24", categoryId: "9", name: "Mountains" },
+        { id: "25", categoryId: "9", name: "Waterfalls" },
+        { id: "26", categoryId: "10", name: "Adventure Parks" },
+        { id: "27", categoryId: "10", name: "Hiking" },
+        { id: "28", categoryId: "11", name: "Man-Made" }
+      ];
+      const [selectedCategory, setSelectedCategory] = useState("");
+
   const [formData, setFormData] = useState({
     name: "",
     description: "",
-    owningEntityCode: "EE_677652F2D9237",
+    owningEntityCode: "",
+    owningEntityBranchCode: "",
     qrBase: "",
     overview: "",
     highlight: "",
@@ -104,6 +152,16 @@ const DestinationRegistration = () => {
     });
   };
 
+    // Handle category change
+    const handleCategoryChange = (e) => {
+        setSelectedCategory(e.target.value);
+        setFormData((prev) => ({
+          ...prev,
+          tourSubCategoryCodes: [""], // Reset subcategory codes when category changes
+        }));
+      };
+    
+
   // Add a new tour subcategory code field
   const handleAddTourSubCategoryCode = () => {
     setFormData((prev) => ({
@@ -130,6 +188,7 @@ const DestinationRegistration = () => {
     data.append("name", formData.name);
     data.append("description", formData.description);
     data.append("owningEntityCode", formData.owningEntityCode);
+    data.append("owningEntityBranchCode", formData.owningEntityBranchCode);
     data.append("qrBase", formData.qrBase);
     data.append("overview", formData.overview);
     data.append("highlight", formData.highlight);
@@ -173,6 +232,11 @@ const DestinationRegistration = () => {
     dispatch(destinationPost(data));
   };
 
+    // Filter subcategories based on selected category
+    const filteredSubcategories = subcategories.filter(
+        (sub) => sub.categoryId === selectedCategory
+      );
+
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Destination Registration</h1>
@@ -196,7 +260,7 @@ const DestinationRegistration = () => {
             className="border rounded px-4 py-2 w-full"
           ></textarea>
         </div>
-               <div className="space-y-2">
+        <div className="space-y-2">
           <label className="block font-medium">Owning Entity Code:</label>
           <select
             name="owningEntityCode"
@@ -204,11 +268,26 @@ const DestinationRegistration = () => {
             onChange={handleInputChange}
             className="border rounded px-4 py-2 w-full"
           >
-              <option value="EE_67612E84966D6">Select</option>
+            <option>Select</option>
             <option value="EE_67612E84966D6">EE_67612E84966D6</option>
             {/* Add more options here if needed */}
           </select>
         </div>
+
+        <div className="space-y-2">
+            <label className="block font-medium">Owning Entity Branch Code:</label>
+            <select
+                name="owningEntityBranchCode"
+                value={formData.owningEntityBranchCode}
+                onChange={handleInputChange}
+                className="border rounded px-4 py-2 w-full"
+            >
+                <option>Select</option>
+                <option value="EB_67612E84966D6">EB_67612E84966D6</option>
+                {/* Add more options here if needed */}
+            </select>
+        </div>
+
         <div className="space-y-2">
           <label className="block font-medium">QR Base:</label>
           <input
@@ -388,26 +467,43 @@ const DestinationRegistration = () => {
         ))}
         
         {/* Tour Subcategory Codes */}
-        <h3 className="text-xl font-semibold mt-4">Tour Subcategory Codes</h3>
-        <button
+        <h3 className="text-xl font-semibold mt-4">Destination Category</h3>
+        <div className="space-y-2">
+          <label className="block font-medium">Category:</label>
+          <select
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+            className="border rounded px-4 py-2 w-full"
+          >
+            <option value="">Select Category</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        {/* <button
           type="button"
           onClick={handleAddTourSubCategoryCode}
           className="bg-blue-500 text-white px-4 py-2 rounded"
         >
           Add Subcategory Code
-        </button>
+        </button> */}
         {formData.tourSubCategoryCodes.map((code, index) => (
           <div key={index} className="space-y-2 mt-2">
-            <label className="block font-medium">Subcategory Code {index + 1}:</label>
+            <label className="block font-medium">Subcategory  {index + 1}:</label>
             <select
               value={code}
               onChange={(e) => handleTourSubCategoryCodeChange(e, index)}
               className="border rounded px-4 py-2 w-full"
             >
               <option value="">Select Subcategory Code</option>
-              <option value="1">Religious</option>
-              <option value="2">Catholic</option>
-              {/* Add more options here if needed */}
+              {filteredSubcategories.map((subcategory) => (
+                <option key={subcategory.id} value={subcategory.id}>
+                  {subcategory.name}
+                </option>
+              ))}
             </select>
           </div>
         ))}
@@ -418,6 +514,8 @@ const DestinationRegistration = () => {
         >
           Submit
         </button>
+
+        
       </form>
     </div>
   );

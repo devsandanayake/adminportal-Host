@@ -129,10 +129,7 @@ export default function Page() {
         {/* Error Message */}
         {error && <p className="text-red-500 mt-4">Error: {error}</p>}
 
-        {/* Success Message */}
-        {data && (
-          <p className="text-green-500 mt-4">Entity registered successfully!</p>
-        )}
+       
       </form>
     </div>
   );

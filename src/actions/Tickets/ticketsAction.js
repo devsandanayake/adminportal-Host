@@ -5,7 +5,7 @@ import {
     TICKET_SUCCESS,
     TICKET_FAILURE,
 }
-from '../actions/types';
+from '../../actions/types';
 
 export const ticketRequest = () => ({
     type: TICKET_REQUEST,
@@ -23,15 +23,22 @@ export const ticketFailure = (error) => ({
 
 
 export const tickectPost = (ticket) => {
+    // Log and validate ticket data
+    console.log("Ticket data: ", ticket);
+
+    for (const value of ticket) {
+        console.log(value); 
+    }
+
     return (dispatch) => {
         dispatch(ticketRequest());
-        axiosInstance.post(`${WEB_CLIENT}/destination-panel/ticket/new-ticket`, { ticket: ticket })
+        axiosInstance.post(`${WEB_CLIENT}/destination-panel/ticket/new-ticket`, ticket)
             .then(response => {
                 dispatch(ticketSuccess(response.data));
             })
             .catch(error => {
-                dispatch(ticketFailure(error.message));
+                console.error("API error response: ", error.response?.data || error.message);
+                dispatch(ticketFailure(error.response?.data?.message || error.message));
             });
     };
-}
-
+};

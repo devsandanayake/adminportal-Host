@@ -1,6 +1,7 @@
- import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { tickectPost } from '../../actions/Tickets/ticketsAction';
+import { useParams } from 'react-router-dom';
 import moment from 'moment';
 
 export default function TicketsRegisteration() {

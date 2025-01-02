@@ -24,6 +24,7 @@ import ShortViewModel from './Components/ShortRent/ViewModel';
 import UserProfile from './Components/UserM/User'
 import EntityRegistration from './Components/Entity/Registration/page'
 import DestinationRegistration from './Components/Destination/DestinationRegistration/DestinationRegistration';
+import TicketsRegisteration from './Components/Tickets/TicketsRegisteration';
  
 
 
@@ -65,6 +66,7 @@ function App() {
         <Route path='/userDetails/:username' element={<UserProfile />} />
         <Route path='/entityRegistartion' element={<EntityRegistration />} />
         <Route path='/destinationRegistartion' element={<DestinationRegistration />} />
+        <Route path='/ticketsRegistartion' element={<TicketsRegisteration />} />
       </Routes>
       </Layout>
     </Router>

@@ -85,57 +85,6 @@ export default function SideNavbar() {
                     <span>Home</span>
                   </a>
                 </li>
-                <li className="nav-item">
-                  <a className="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                    <i className="bi bi-chat-left-quote"></i><span>Inquiries Management</span><i className="bi bi-chevron-down ms-auto"></i>
-                  </a>
-                  <ul id="components-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                      <Link
-                          className="flex items-center"
-                          to="/acInquery">
-                        <i className="bi bi-hammer"></i><span>Auction</span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                          className="flex items-center"
-                          to="/LrentInquiry">
-                        <i className="bi bi-calendar4-week"></i><span>Long Term Rent</span>
-                       
-                      </Link>
-                    </li>
-                  </ul>
-                </li>
-
-                <li className="nav-item">
-                  <a className="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                    <i className="bi bi-calendar-plus"></i><span>Rent Management</span><i className="bi bi-chevron-down ms-auto"></i>
-                  </a>
-                  <ul id="forms-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                      <Link
-                          className="flex items-center"
-                          to="/shortRent/view">
-                        <i className="bi bi-calendar-range"></i><span>Short Term Rent</span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                          className="flex items-center"
-                          to="/rentInquiry/sub2">
-                        <i className="bi bi-calendar4-week"></i><span>Long Term Rent</span>
-                      </Link>
-                    </li>
-                  </ul>
-                </li>
-
-                <li className="nav-item">
-                  <Link className="nav-link collapsed" to="/userProfiles">
-                    <i class="bi bi-people"></i>
-                    <span>Users Management</span>
-                  </Link>
-                </li>
 
                 <li className="nav-item">
                   <Link className="nav-link collapsed" to="/entityRegistartion">
@@ -148,6 +97,15 @@ export default function SideNavbar() {
                   <Link className="nav-link collapsed" to="/destinationRegistartion">
                     <i class="bi bi-people"></i>
                     <span>Destination Registration</span>
+                  </Link>
+                </li>
+
+                
+
+                <li className="nav-item">
+                  <Link className="nav-link collapsed" to="/ticketsRegistartion">
+                    <i class="bi bi-people"></i>
+                    <span>Ticket Cofiguration</span>
                   </Link>
                 </li>
 
