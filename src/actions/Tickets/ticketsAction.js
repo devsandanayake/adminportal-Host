@@ -26,9 +26,7 @@ export const tickectPost = (ticket) => {
     // Log and validate ticket data
     console.log("Ticket data: ", ticket);
 
-    for (const value of ticket) {
-        console.log(value); 
-    }
+  
 
     return (dispatch) => {
         dispatch(ticketRequest());

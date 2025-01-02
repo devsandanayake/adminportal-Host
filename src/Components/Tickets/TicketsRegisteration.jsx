@@ -16,12 +16,12 @@ export default function TicketsRegisteration() {
     validFrom: "2024-12-10 00:00:00",
     validTill: "2025-12-10 00:00:00",
     ticketGroupCode: "ENTRANCE_TICKETS_LOCAL",
-    ticketOriginCode: "FOREIGN",
+    ticketOriginCode: "LOCAL",
     ticketPricing: {
-      currencyCode: "USD",
+      currencyCode: "LKR",
       validFrom: "2024-12-10 00:00:00",
       validTill: "2025-12-10 00:00:00",
-      basePrice: "250"
+      basePrice: "100"
     },
     ticketImages: [
       {
@@ -37,8 +37,8 @@ export default function TicketsRegisteration() {
         displayName: "Tuesday",
         validFrom: "2024-12-10 00:00:00",
         validTill: "2025-12-10 00:00:00",
-        dayStartFrom: "09:00:00",
-        dayEndTo: "16:00:00",
+        dayStartFrom: "09:00",
+        dayEndTo: "16:00",
         day: "Monday"
       }
     ],
@@ -46,7 +46,7 @@ export default function TicketsRegisteration() {
     registrationValidTill: "2025-12-10 00:00:00",
     ticketAgerCode: "ADULT",
     ticketValidity: {
-      noOfDays: "10"
+      noOfDays: "5"
     },
     qrReleaseFormatCode: "PER_BOOKING"
   });
@@ -179,8 +179,8 @@ export default function TicketsRegisteration() {
       data.append(`ticketSession[${index}][displayName]`, session.displayName);
       data.append(`ticketSession[${index}][validFrom]`, moment(session.validFrom).format("YYYY-MM-DD HH:mm:ss"));
       data.append(`ticketSession[${index}][validTill]`, moment(session.validTill).format("YYYY-MM-DD HH:mm:ss"));
-         data.append(`ticketSession[${index}][dayStartFrom]`, session.dayStartFrom + ":00");
-    data.append(`ticketSession[${index}][dayEndTo]`, session.dayEndTo + ":00");
+      data.append(`ticketSession[${index}][dayStartFrom]`, session.dayStartFrom + ":00");
+      data.append(`ticketSession[${index}][dayEndTo]`, session.dayEndTo + ":00");
       data.append(`ticketSession[${index}][day]`, session.day);
     });
   
@@ -235,19 +235,49 @@ export default function TicketsRegisteration() {
             className="border rounded px-4 py-2 w-full"
           ></textarea>
         </div>
-        <div className="space-y-2">
+              <div className="space-y-2">
           <label className="block font-medium">Payment Methods:</label>
-          <select
-            name="paymentMethods"
-            value={formData.paymentMethods}
-            onChange={(e) => setFormData({ ...formData, paymentMethods: Array.from(e.target.selectedOptions, option => option.value) })}
-            className="border rounded px-4 py-2 w-full"
-            multiple
-          >
-            <option value="VISA_ON">VISA_ON</option>
-            <option value="MASTER_CARD_ON">MASTER_CARD_ON</option>
-            {/* Add more options here if needed */}
-          </select>
+          <div className="space-y-1">
+            <label className="inline-flex items-center">
+              <input
+                type="checkbox"
+                name="paymentMethods"
+                value="VISA_ON"
+                checked={formData.paymentMethods.includes("VISA_ON")}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setFormData((prev) => ({
+                    ...prev,
+                    paymentMethods: e.target.checked
+                      ? [...prev.paymentMethods, value]
+                      : prev.paymentMethods.filter((method) => method !== value),
+                  }));
+                }}
+                className="form-checkbox"
+              />
+              <span className="ml-2">VISA_ON</span>
+            </label>
+            <label className="inline-flex items-center">
+              <input
+                type="checkbox"
+                name="paymentMethods"
+                value="MASTER_CARD_ON"
+                checked={formData.paymentMethods.includes("MASTER_CARD_ON")}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setFormData((prev) => ({
+                    ...prev,
+                    paymentMethods: e.target.checked
+                      ? [...prev.paymentMethods, value]
+                      : prev.paymentMethods.filter((method) => method !== value),
+                  }));
+                }}
+                className="form-checkbox"
+              />
+              <span className="ml-2">MASTER_CARD_ON</span>
+            </label>
+            {/* Add more checkboxes here if needed */}
+          </div>
         </div>
         <div className="space-y-2">
           <label className="block font-medium">Ticket Type Code:</label>
