@@ -27,7 +27,13 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center min-h-screen"
+    style={{
+      backgroundImage: 'url(https://img.freepik.com/free-vector/flat-design-travel-background_23-2149193475.jpg?t=st=1735857330~exp=1735860930~hmac=35eb8364b3394d65ff8de0d28f4a38a886c4c462968fe1705c6cc4ea1a3e5214&w=1800)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    }}
+    >
       <div
         style={{ boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }}
         className="bg-gray-800 rounded-lg shadow-xl overflow-hidden max-w-lg w-full"
