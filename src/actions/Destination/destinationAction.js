@@ -44,6 +44,7 @@ export const destinationPost = (destination) => {
             })
             .catch(error => {
                 dispatch(destinationFailure(error.message));
+                alert('Destination Registration Failed');
            
             });
     };
