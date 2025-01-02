@@ -57,7 +57,7 @@ const DestinationRegistration = () => {
     name: "",
     description: "",
     owningEntityCode: "",
-    owningEntityBranchCode: "",
+    owningEntityBranchCode: null,
     qrBase: "",
     overview: "",
     highlight: "",
