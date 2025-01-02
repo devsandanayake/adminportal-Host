@@ -100,6 +100,13 @@ export default function SideNavbar() {
                   </Link>
                 </li>
 
+                <li className="nav-item">
+                  <Link className="nav-link collapsed" to="/add-new-destination">
+                    <i class="bi bi-people"></i>
+                    <span>Destination Registration -- (updateing view)</span>
+                  </Link>
+                </li>
+
                 
 
                 <li className="nav-item">

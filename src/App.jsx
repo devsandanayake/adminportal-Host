@@ -25,6 +25,9 @@ import UserProfile from './Components/UserM/User'
 import EntityRegistration from './Components/Entity/Registration/page'
 import DestinationRegistration from './Components/Destination/DestinationRegistration/DestinationRegistration';
 import TicketsRegisteration from './Components/Tickets/TicketsRegisteration';
+import DestinationList from "./Components/Destination1/DestinationList";
+import AddNewRegistrationComponent from "./Components/Destination1/DestinationRegistration/AddNewRegistrationComponent";
+ 
  
 
 
@@ -67,6 +70,8 @@ function App() {
         <Route path='/entityRegistartion' element={<EntityRegistration />} />
         <Route path='/destinationRegistartion' element={<DestinationRegistration />} />
         <Route path='/ticketsRegistartion' element={<TicketsRegisteration />} />
+        <Route path='/destinations' element={<DestinationList />} />
+        <Route path='/add-new-destination' element={<AddNewRegistrationComponent />} />
       </Routes>
       </Layout>
     </Router>
