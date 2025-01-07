@@ -32,6 +32,7 @@ class AddNewRegistrationComponent extends Component
             }
         }
         this.handleInputChange = this.handleInputChange.bind(this)
+        console.log(this.state);
     }
 
     handleInputChange = (e) => {
@@ -76,7 +77,7 @@ class AddNewRegistrationComponent extends Component
                                     <div className="form-group mb-0">
                                         <label className={`mb-1`} htmlFor="region2">Owning Entity</label>
                                         <br/>
-                                        <Select2 className={`w-100 form-control mt-2`} data={[]}
+                                        <Select2 className={`w-100 form-control mt-2`} data={['dwd']}
                                                  options={{
                                                      placeholder: 'Select one entity',
                                                  }}
@@ -87,7 +88,7 @@ class AddNewRegistrationComponent extends Component
                                     <div className="form-group mb-0">
                                         <label className={`mb-1`} htmlFor="region2">Owning Entity Branch</label>
                                         <br/>
-                                        <Select2 className={`w-100 form-control mt-2`} data={[]}
+                                        <Select2 className={`w-100 form-control mt-2`} data={['dwd','dwdd']}
                                                  options={{
                                                      placeholder: 'Select one entity branch',
                                                  }}

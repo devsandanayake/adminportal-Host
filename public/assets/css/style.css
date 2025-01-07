@@ -608,7 +608,7 @@ h6 {
   top: 0px;
   left: 0;
   bottom: 0;
-  width: 270px;
+  width: 250px;
   z-index: 996;
   transition: all 0.3s;
   padding: 20px;
@@ -616,7 +616,7 @@ h6 {
   scrollbar-width: thin;
   scrollbar-color: #EE4444 transparent;
   box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
-  background-color: #202938;
+  background-color: #a4e9a8;
 }
 
 @media (max-width: 1199px) {
@@ -689,7 +689,7 @@ h6 {
   display: flex;
   align-items: center;
   font-size: 13px;
-  color: #ffffff;
+  color: #000000;
   transition: 0.3;
   padding: 8px 15px;
   border-radius: 4px;
@@ -698,12 +698,12 @@ h6 {
 .sidebar-nav .nav-link i {
   font-size: 16px;
   margin-right: 10px;
-  color: #ffffff;
+  color: #000000;
 }
 
 .admin-title,
 .sidebar-nav .nav-link.collapsed {
-  color: #ffffff;
+  color: #000000;
 }
 
 .admin-title
@@ -712,7 +712,7 @@ h6 {
 }
 
 .sidebar-nav .nav-link.collapsed i {
-  color: #ffffff;
+  color: #000000;
 }
 
 .sidebar-nav .nav-link:hover {

@@ -1384,6 +1384,11 @@
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.7.2.tgz#7123d74b0c1e726794aed1184795dbce12186470"
   integrity sha512-Zs+YeHUC5fkt7Mg1l6XTniei3k4bwG/yo3iFUtZWd/pMx9g3fdvkSK9E0FOC+++phXOka78uJcYb8JaFkW52Xg==
 
+"@fortawesome/fontawesome-free@^6.7.2":
+  version "6.7.2"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-6.7.2.tgz#8249de9b7e22fcb3ceb5e66090c30a1d5492b81a"
+  integrity sha512-JUOtgFW6k9u4Y+xeIaEiLr3+cjoUPiAuLXoyKOJSia6Duzb7pq+A76P9ZdPDoAoxHdHzq6gE9/jKBGXlZT8FbA==
+
 "@fortawesome/fontawesome-svg-core@^6.7.2":
   version "6.7.2"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-6.7.2.tgz#0ac6013724d5cc327c1eb81335b91300a4fce2f2"
@@ -4079,19 +4084,19 @@ data-view-byte-offset@^1.0.0:
     is-data-view "^1.0.1"
 
 datatables.net-bs5@^2.1.8:
-  version "2.1.8"
-  resolved "https://registry.yarnpkg.com/datatables.net-bs5/-/datatables.net-bs5-2.1.8.tgz#860717c4ee85ecb84812ba9a73fb1204aa2a68b6"
-  integrity sha512-YlGws8eI3iw/1AmKJH18+YMzm/UgGb6o9s14KAC24QT1/8anolm8GnVAgGcwUcvHm3hn1i8A5QXqgbqeMRINeg==
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/datatables.net-bs5/-/datatables.net-bs5-2.2.0.tgz#ba80819825b96827d6361f8385b092c2a657a8af"
+  integrity sha512-klqdrghM0BkBWulaWiGdKwdZyPHK+8coBGjhSQAZe/eQBnr7OLC8wl7NqPfQuVXv4J74HgO6K1gIYHKHbHjrtA==
   dependencies:
-    datatables.net "2.1.8"
+    datatables.net "2.2.0"
     jquery ">=1.7"
 
-datatables.net-dt@^2:
-  version "2.1.8"
-  resolved "https://registry.yarnpkg.com/datatables.net-dt/-/datatables.net-dt-2.1.8.tgz#ef4ada436411bff6c68ee02213222d8caefa7af9"
-  integrity sha512-/ScKmyKIpKXzjOJrnJLOWMf2jOQfrYjayNMhUyeMzf3jKhNevHNvImU9MQ/Bab9yheKLjHLL24IgnshAvRFrng==
+datatables.net-dt@^2, datatables.net-dt@^2.1.8:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/datatables.net-dt/-/datatables.net-dt-2.2.0.tgz#bc85cea50d6c941ed82212e279e015239f782e44"
+  integrity sha512-Zfk+8FL8NgH18sBJ9DIvEmZPXcwQETLUpvxWFXC7VXwRuVKbZniPMblO2s/AGsNUcReKw1bTRiXR6oD9gPc6xg==
   dependencies:
-    datatables.net "2.1.8"
+    datatables.net "2.2.0"
     jquery ">=1.7"
 
 datatables.net-react@^1.0.0:
@@ -4133,10 +4138,10 @@ datatables.net-select@2.1.0:
     datatables.net "^2"
     jquery ">=1.7"
 
-datatables.net@2.1.8, datatables.net@^2:
-  version "2.1.8"
-  resolved "https://registry.yarnpkg.com/datatables.net/-/datatables.net-2.1.8.tgz#9b020f18e927cc924d72411f62dc595cc688669b"
-  integrity sha512-47ULt+U4bcjbuGTpTlT6SnCuSFVRBxxdWa6X3NfvTObBJ2BZU0o+JUIl05wQ6cABNIavjbAV51gpgvFsMHL9zA==
+datatables.net@2.2.0, datatables.net@^2:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/datatables.net/-/datatables.net-2.2.0.tgz#d7e92ede9a3bf23ac4c360e475fbe6313f16fd56"
+  integrity sha512-q/G5ylL+AhMLFFHNYQAgvooCZtmbudc7wwzKkCZI4B1HnYec4SqnWtcTFjC7P6EtL1UGyx16FcjQ0U84S86mLg==
   dependencies:
     jquery ">=1.7"
 
@@ -8991,6 +8996,14 @@ react-scripts@^5.0.1:
   optionalDependencies:
     fsevents "^2.3.2"
 
+react-select2-wrapper@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-select2-wrapper/-/react-select2-wrapper-1.0.3.tgz#67f47ff350abd7d339632ae7cf3eb929604c979a"
+  integrity sha512-mClwxsH2E73Gu0IciJ2MVlBuD0d+VgdnigGFnd7oDgWHWl/ITMvbl2KwZfZkA278gl3cCVjKENWF6NnB6jT2+Q==
+  dependencies:
+    select2 "^4.0.0"
+    shallow-equal-fuzzy "^0.0.2"
+
 react-select2-wrapper@^1.0.4-beta6:
   version "1.0.4-beta6"
   resolved "https://registry.yarnpkg.com/react-select2-wrapper/-/react-select2-wrapper-1.0.4-beta6.tgz#f2681d86cc6828fccc078037d51f82019df02434"
@@ -8999,6 +9012,13 @@ react-select2-wrapper@^1.0.4-beta6:
     prop-types "^15.5.8"
     select2 "^4.0.0"
     shallow-equal-fuzzy "^0.0.2"
+
+react-select2@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/react-select2/-/react-select2-4.0.3.tgz#89cc79e7eafcdff1a2f31f096e8deb483b7503ea"
+  integrity sha512-wvn7uV0UW5O0TdeEeBRLxB1GJ7NAFTbMumgRa/+e2TVHnqUdMM7wX+ImjpsITcuIjbwyRmkIpBoooZyM3MMffw==
+  dependencies:
+    react-select2-wrapper "^1.0.3"
 
 react@^18.3.1:
   version "18.3.1"
@@ -9405,6 +9425,11 @@ select2@^4.0.0:
   version "4.0.13"
   resolved "https://registry.yarnpkg.com/select2/-/select2-4.0.13.tgz#0dbe377df3f96167c4c1626033e924372d8ef44d"
   integrity sha512-1JeB87s6oN/TDxQQYCvS5EFoQyvV6eYMZZ0AeA4tdFDYWN3BAGZ8npr17UBFddU0lgAt3H0yjX3X6/ekOj1yjw==
+
+select2@^4.1.0-rc.0:
+  version "4.1.0-rc.0"
+  resolved "https://registry.yarnpkg.com/select2/-/select2-4.1.0-rc.0.tgz#ba3cd3901dda0155e1c0219ab41b74ba51ea22d8"
+  integrity sha512-Hr9TdhyHCZUtwznEH2CBf7967mEM0idtJ5nMtjvk3Up5tPukOLXbHUNmh10oRfeNIhj+3GD3niu+g6sVK+gK0A==
 
 selfsigned@^2.1.1:
   version "2.4.1"

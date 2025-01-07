@@ -9,8 +9,8 @@ export default function Layout({ children }) {
           <div className={`layout-content`}>
               <div className="flex">
                   <SideNavbar/>
-                  <main id="main" class="main w-100">
-                      <section class="section dashboard">
+                  <main id="main" className="main w-100">
+                      <section className="section dashboard">
                           {children}
                       </section>
                   </main>

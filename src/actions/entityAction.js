@@ -34,7 +34,6 @@ export const registerEntity = (entity) => {
         )
             .then(response => {
                 dispatch(entitySuccess(response.data));
-                alert('Entity Registered Successfully');
             })
             .catch(error => {
                 dispatch(entityFailure(error.message));

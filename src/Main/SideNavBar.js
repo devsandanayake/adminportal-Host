@@ -88,31 +88,15 @@ export default function SideNavbar() {
 
                 <li className="nav-item">
                   <Link className="nav-link collapsed" to="/entityRegistartion">
-                    <i class="bi bi-people"></i>
+                    <i className="bi bi-people"></i>
                     <span>Entity Registration</span>
                   </Link>
                 </li>
 
                 <li className="nav-item">
-                  <Link className="nav-link collapsed" to="/destinationRegistartion">
-                    <i class="bi bi-people"></i>
-                    <span>Destination Registration</span>
-                  </Link>
-                </li>
-
-                <li className="nav-item">
-                  <Link className="nav-link collapsed" to="/add-new-destination">
-                    <i class="bi bi-people"></i>
-                    <span>Destination Registration -- (updateing view)</span>
-                  </Link>
-                </li>
-
-                
-
-                <li className="nav-item">
-                  <Link className="nav-link collapsed" to="/ticketsRegistartion">
-                    <i class="bi bi-people"></i>
-                    <span>Ticket Cofiguration</span>
+                  <Link className="nav-link collapsed" to="/destinations">
+                    <i className="bi bi-people"></i>
+                    <span>Destinations</span>
                   </Link>
                 </li>
 

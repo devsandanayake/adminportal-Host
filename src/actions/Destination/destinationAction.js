@@ -38,14 +38,9 @@ export const destinationPost = (destination) => {
         axiosInstance.post(`${WEB_CLIENT}/destination-panel/registration/new-destination`, destination)
             .then(response => {
                 dispatch(destinationSuccess(response.data));
-                if (window.confirm('Destination Registered Successfully. Do you want to create a ticket?')) {
-                    window.location.href = `/ticket/${response.data.destinationCode}`;  
-                }
             })
             .catch(error => {
                 dispatch(destinationFailure(error.message));
-                alert('Destination Registration Failed');
-           
             });
     };
 }

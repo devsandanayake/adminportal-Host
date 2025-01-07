@@ -20,7 +20,7 @@ class DestinationList extends Component{
                 <div className={`card-header`}>
                     <div className={`d-flex align-items-center`}>
                         <h1 className={`flex-1`}>Destinations</h1>
-                        <a href={'/add-new-destination'} className={`btn btn-sm btn-primary`}>Add New Destination</a>
+                        <a href={'/destinationRegistartion'} className={`btn btn-sm btn-primary`}>Add New Destination</a>
                     </div>
                 </div>
                 <div className={`card-body`}>

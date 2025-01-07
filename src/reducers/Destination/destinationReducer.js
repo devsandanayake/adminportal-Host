@@ -3,7 +3,7 @@ import {
     DESTINATION_SUCCESS,
     DESTINATION_FAILURE,
 }
-from '../../actions/types';
+from '../../actions/types'
 
 const initialState = {
     loading : false,
