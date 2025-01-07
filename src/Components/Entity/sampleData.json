@@ -1,0 +1,68 @@
+[
+    {
+    "id": 1,
+    "name": "My New Entity",
+    "entityTypeCode": "ENTITY_TYPE_01",
+    "description": "This is a description of the entity",
+    "entityBranches": [
+      {
+        "id": 1,
+        "branchName": "Branch 1"
+      },
+      {
+        "id": 2,
+        "branchName": "Branch 2"
+      }
+    ]
+},
+{
+    "id": 2,
+    "name": "My Second Entity",
+    "entityTypeCode": "ENTITY_TYPE_02",
+    "description": "This is a description of the second entity",
+    "entityBranches": [
+      {
+        "id": 1,
+        "branchName": "Branch 1"
+      },
+      {
+        "id": 2,
+        "branchName": "Branch 2"
+      }
+    ]
+},
+{
+    "id": 3,
+    "name": "My Third Entity",
+    "entityTypeCode": "ENTITY_TYPE_03",
+    "description": "This is a description of the third entity",
+    "entityBranches": [
+      {
+        "id": 1,
+        "branchName": "Branch 1"
+        
+      },
+      {
+        "id": 2,
+        "branchName": "Branch 2"
+        
+      }
+    ]
+},
+{
+    "id": 4,
+    "name": "My Fourth Entity",
+    "entityTypeCode": "ENTITY_TYPE_04",
+    "description": "This is a description of the fourth entity",
+    "entityBranches": [
+      {
+        "id": 1,
+        "branchName": "Branch 1"
+      },
+      {
+        "id": 2,
+        "branchName": "Branch 2"
+      }
+    ]
+}
+]

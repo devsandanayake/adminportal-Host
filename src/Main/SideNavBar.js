@@ -87,9 +87,9 @@ export default function SideNavbar() {
                 </li>
 
                 <li className="nav-item">
-                  <Link className="nav-link collapsed" to="/entityRegistartion">
+                  <Link className="nav-link collapsed" to="/entityView">
                     <i className="bi bi-people"></i>
-                    <span>Entity Registration</span>
+                    <span>Entity</span>
                   </Link>
                 </li>
 

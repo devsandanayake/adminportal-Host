@@ -9,6 +9,7 @@ import DestinationRegistration from './Components/Destination/DestinationRegistr
 import DestinationList from "./Components/Destination/DestinationList";
 import AddNewRegistrationComponent from "./Components/Destination/DestinationRegistration/AddNewRegistrationComponent";
 import CancellationTable from './Components/Dashboard/Cancellation/CancellationTable';
+import EntityView from './Components/Entity/EntityView';
  
 
 
@@ -35,6 +36,7 @@ function App() {
         <Route path='/destinationRegistartion' element={<DestinationRegistration />} />
         <Route path='/add-new-destination' element={<AddNewRegistrationComponent />} />
         <Route path='/cancellation' element={<CancellationTable />} />
+        <Route path='/entityView' element={<EntityView />} />
       </Routes>
       </Layout>
     </Router>
