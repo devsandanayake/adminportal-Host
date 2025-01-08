@@ -7,6 +7,7 @@ from '../../actions/types'
 
 const initialState = {
     loading : false,
+    success:false,
     data: [],
     error: '',
 }
@@ -21,6 +22,7 @@ const destinationReducer = (state = initialState, action) => {
         case DESTINATION_SUCCESS:
             return{
                 loading: false,
+                success:true,
                 data: action.payload,
                 error: '',
             };

@@ -303,7 +303,7 @@ const DestinationRegistration = () => {
       className="border rounded-lg px-4 py-2 w-full"
     >
       <option value="">Select</option>
-      <option value="EB_67612E84966D6">SLT-Travel Sample Entity</option>
+      <option value="EE_67612E84966D6">SLT-Travel Sample Entity</option>
       <option value="EE_6776DD67C2FB4">Zoology</option>
     </select>
   </div>
