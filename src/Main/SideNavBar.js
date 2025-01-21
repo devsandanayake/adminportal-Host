@@ -101,6 +101,13 @@ export default function SideNavbar() {
                 </li>
 
                 <li className="nav-item">
+                  <Link className="nav-link collapsed" to="/ticketInsert">
+                    <i className="bi bi-people"></i>
+                    <span>Ticket</span>
+                  </Link>
+                </li>
+
+                <li className="nav-item">
                   <a onClick={handleLogout} className="nav-link collapsed">
                     <i className="bi bi-grid"></i>
                     <span>Logout</span>

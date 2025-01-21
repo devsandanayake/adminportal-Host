@@ -16,6 +16,7 @@ export default function Dashboard() {
     <div className='row'>
         <Card />
       </div>
+      
   </div>
       
       </>
