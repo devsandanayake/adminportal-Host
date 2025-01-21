@@ -45,3 +45,31 @@ export const destinationPost = (destination) => {
     };
 }
 
+export const getDestinationCodeName = () => {
+    return (dispatch) => {
+        dispatch(destinationRequest());
+        axiosInstance.get(`${WEB_CLIENT}/admin-pannel-api/destination/destination-code`)
+            .then(response => {
+                dispatch(destinationSuccess(response.data));
+            })
+            .catch(error => {
+                dispatch(destinationFailure(error.message));
+            });
+    };
+}
+
+
+export const getDestinationCategory = () => {
+    return (dispatch) => {
+        dispatch(destinationRequest());
+        axiosInstance.get(`${WEB_CLIENT}/admin-pannel-api/destination/subcategory-data`)
+            .then(response => {
+                dispatch(destinationSuccess(response.data));
+            })
+            .catch(error => {
+                dispatch(destinationFailure(error.message));
+            });
+    };
+}
+
+

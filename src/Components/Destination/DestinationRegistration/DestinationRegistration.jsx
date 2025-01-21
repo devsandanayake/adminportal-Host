@@ -1,69 +1,46 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
-import { destinationPost } from "../../../actions/Destination/destinationAction";
+import { destinationPost} from "../../../actions/Destination/destinationAction";
+import {getDestinationCategory} from "../../../actions/Destination/destinationCategoryAction";
 
 const DestinationRegistration = () => {
   const dispatch = useDispatch();
   const destinationState = useSelector((state) => state.destination);
+  const destinationCategoryState = useSelector((state) => state.destinationCategory);
   const [loading, setLoading] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [filteredSubcategories, setFilteredSubcategories] = useState([]);
   
   console.log("sss",destinationState);
 
-    // Example categories and subcategories data
-    const categories = [
-        { id: "1", name: "Religious" },
-        { id: "2", name: "Classical" },
-        { id: "3", name: "Entertaining" },
-        { id: "4", name: "Sea" },
-        { id: "5", name: "Train" },
-        { id: "6", name: "Urban" },
-        { id: "7", name: "Historical" },
-        { id: "8", name: "Animal" },
-        { id: "9", name: "Nature" },
-        { id: "10", name: "Adventure" },
-        { id: "11", name: "Heritage" }
-      ];
-      
-      const subcategories = [
-        { id: "1", categoryId: "1", name: "Buddhism" },
-        { id: "2", categoryId: "1", name: "Hinduism" },
-        { id: "3", categoryId: "1", name: "Catholic" },
-        { id: "4", categoryId: "2", name: "Arts and Sculpture" },
-        { id: "5", categoryId: "2", name: "Architecture" },
-        { id: "6", categoryId: "2", name: "Cultural" },
-        { id: "7", categoryId: "2", name: "Educational" },
-        { id: "8", categoryId: "2", name: "Museums" },
-        { id: "9", categoryId: "3", name: "Carnival" },
-        { id: "18", categoryId: "4", name: "Beach" },
-        { id:"19" , categoryId:"4",  name:"Swimming"},
-        { id: "20", categoryId: "4", name: "Surfing" },
-        { id: "21", categoryId: "4", name: "Scuba Diving" },
-        { id: "22", categoryId: "4", name: "Watching Turtles" },
-        { id: "23", categoryId: "4", name: "Whales / Dolphins" },
-        { id: "24" ,  categoryId:"4", name:"Boat Riding"},
-        { id: "17" ,  categoryId:"4", name:"Corals Reefs"},
-        { id: "31", categoryId: "5", name: "Ella Odyssey" },
-        { id: "32", categoryId: "6", name: "Shopping Malls" },
-        { id: "33", categoryId: "6", name: "Street Food" },
-        { id: "34", categoryId: "7", name: "Ruins" },
-        { id: "35", categoryId: "7", name: "Memorials" },
-        { id: "36", categoryId: "7", name: "Conserved" },
-        { id: "37", categoryId: "8", name: "Wild Animals" },
-        { id: "38", categoryId: "8", name: "Birds" },
-        { id: "39", categoryId: "8", name: "Zoo" },
-        { id: "40", categoryId: "8", name: "Safari Park" },
-        { id: "41", categoryId: "9", name: "Forests-wet zone" },
-        { id: "42", categoryId: "9", name: "Forests-dry zone" },
-        { id: "43", categoryId: "9", name: "Mountains" },
-        { id: "44", categoryId: "9", name: "Waterfalls" },
-        { id: "45", categoryId: "10", name: "Adventure Parks" },
-        { id: "46", categoryId: "10", name: "Hiking" },
-        { id: "47", categoryId: "10", name: "Entertainment" },
-        { id: "48", categoryId: "11", name: "Natural" },
-        { id: "49", categoryId: "11", name: "Man-Made" }
-      ];
-      const [selectedCategory, setSelectedCategory] = useState("");
+  React.useEffect(() => {
+    dispatch(getDestinationCategory());
+  }, [dispatch]);
+
+  React.useEffect(() => {
+    if (destinationCategoryState.success) {
+      setCategories(destinationCategoryState.data);
+    }
+  }, [destinationCategoryState]);
+
+   console.log("category",destinationCategoryState);
+
+   const handleCategoryChange = (e) => {
+    const categoryId = e.target.value;
+    setSelectedCategory(categoryId);
+    const selectedCat = categories.find(cat => cat.id === parseInt(categoryId));
+    setFilteredSubcategories(selectedCat ? selectedCat.sub_categories : []);
+  };
+
+  const handleTourSubCategoryCodeChange = (e, index) => {
+    const newCodes = [...formData.tourSubCategoryCodes];
+    newCodes[index] = e.target.value;
+    setFormData({ ...formData, tourSubCategoryCodes: newCodes });
+  };
+
+  const [selectedCategory, setSelectedCategory] = useState("");
+
 
   const [formData, setFormData] = useState({
     name: "",
@@ -84,7 +61,7 @@ const DestinationRegistration = () => {
     tagCodes: [""], // Initialize with one tag code field
     tourSubCategoryCodes: [""], // Initialize with one tour subcategory field
   });
-
+  
   React.useEffect(() => {
     if (destinationState.loading) {
       setLoading(true);
@@ -192,34 +169,7 @@ const DestinationRegistration = () => {
     });
   };
 
-    // Handle category change
-    const handleCategoryChange = (e) => {
-        setSelectedCategory(e.target.value);
-        setFormData((prev) => ({
-          ...prev,
-          tourSubCategoryCodes: [""], // Reset subcategory codes when category changes
-        }));
-      };
-    
-
-  // Add a new tour subcategory code field
-  const handleAddTourSubCategoryCode = () => {
-    setFormData((prev) => ({
-      ...prev,
-      tourSubCategoryCodes: [...prev.tourSubCategoryCodes, ""],
-    }));
-  };
-
-  // Handle tour subcategory code changes
-  const handleTourSubCategoryCodeChange = (e, index) => {
-    const { value } = e.target;
-    setFormData((prev) => {
-      const codes = [...prev.tourSubCategoryCodes];
-      codes[index] = value;
-      return { ...prev, tourSubCategoryCodes: codes };
-    });
-  };
-
+  
   // Submit the form
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -274,11 +224,6 @@ const DestinationRegistration = () => {
     dispatch(destinationPost(data));
   
   };
-
-    // Filter subcategories based on selected category
-    const filteredSubcategories = subcategories.filter(
-        (sub) => sub.categoryId === selectedCategory
-      );
 
   return (
     <div className="container mx-auto p-4">
@@ -593,44 +538,37 @@ const DestinationRegistration = () => {
         {/* Tour Subcategory Codes */}
         <h3 className="text-xl font-semibold mt-4">Destination Category</h3>
         <div className="space-y-2">
-          <label className="block font-medium">Category:</label>
+        <label className="block font-medium">Category:</label>
+        <select
+          value={selectedCategory}
+          onChange={handleCategoryChange}
+          className="border rounded px-4 py-2 w-full"
+        >
+          <option value="">Select Category</option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      {formData.tourSubCategoryCodes.map((code, index) => (
+        <div key={index} className="space-y-2 mt-2">
+          <label className="block font-medium">Subcategory {index + 1}:</label>
           <select
-            value={selectedCategory}
-            onChange={handleCategoryChange}
+            value={code}
+            onChange={(e) => handleTourSubCategoryCodeChange(e, index)}
             className="border rounded px-4 py-2 w-full"
           >
-            <option value="">Select Category</option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
+            <option value="">Select Subcategory Code</option>
+            {filteredSubcategories.map((subcategory) => (
+              <option key={subcategory.cat_sub_cat_id} value={subcategory.cat_sub_cat_id}>
+                {subcategory.name}
               </option>
             ))}
           </select>
         </div>
-        {/* <button
-          type="button"
-          onClick={handleAddTourSubCategoryCode}
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          Add Subcategory Code
-        </button> */}
-        {formData.tourSubCategoryCodes.map((code, index) => (
-          <div key={index} className="space-y-2 mt-2">
-            <label className="block font-medium">Subcategory  {index + 1}:</label>
-            <select
-              value={code}
-              onChange={(e) => handleTourSubCategoryCodeChange(e, index)}
-              className="border rounded px-4 py-2 w-full"
-            >
-              <option value="">Select Subcategory Code</option>
-              {filteredSubcategories.map((subcategory) => (
-                <option key={subcategory.id} value={subcategory.id}>
-                  {subcategory.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        ))}
+      ))}
 
         <button
           type="submit"

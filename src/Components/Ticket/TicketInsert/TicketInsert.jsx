@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import { ticketPost } from '../../../actions/Ticket/ticketAction';
+import { getDestinationCodeName } from '../../../actions/Destination/destinationAction';
 
 export default function TicketInsert() {
   const dispatch = useDispatch();
   const ticketState = useSelector((state) => state.ticket);
+  const destinationState = useSelector((state) => state.destination);
   const [loading, setLoading] = useState(false);
+
+  React.useEffect(() => {
+        dispatch(getDestinationCodeName());
+  }, [dispatch]);
+
+  console.log(destinationState.data);
 
   const [formData, setFormData] = useState({
     destinationCode: 'EDD_678E15C00861F',
@@ -154,10 +162,21 @@ export default function TicketInsert() {
         </div>
       )}
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="space-y-2">
-          <label className="block font-medium">Destination Code:</label>
-          <input name="destinationCode" value={formData.destinationCode} onChange={handleInputChange} className="border rounded px-4 py-2 w-full" />
-        </div>
+      <div className="space-y-2">
+        <label className="block font-medium">Destination Code:</label>
+         <select
+            name="destinationCode"
+            value={formData.destinationCode}
+            onChange={handleInputChange}
+            className="border rounded px-4 py-2 w-full"
+            >
+            {destinationState.data && destinationState.data.map((destination) => (
+            <option key={destination.code} value={destination.code}>
+                {destination.name}
+            </option>
+            ))}
+            </select>
+            </div>
         <div className="space-y-2">
           <label className="block font-medium">Name:</label>
           <input name="name" value={formData.name} onChange={handleInputChange} className="border rounded px-4 py-2 w-full" />
