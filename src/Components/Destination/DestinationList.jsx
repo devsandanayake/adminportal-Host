@@ -46,8 +46,8 @@ const DestinationList = () => {
         <a href="/cancellation/${row.id}" style="color: blue;">
           <i class="bi bi-eye"></i>
         </a>
-        <button className="deactivate-btn" data-id={row.id} style={{ color: 'red' }} title="Deactivate">
-            <i className="ri-tools-fill"></i>
+        <button class="deactivate-btn" data-id="${row.id}" style="color: red;">
+          <i class="ri-tools-fill"></i>
         </button>
       </div>
     ` }
