@@ -5,7 +5,8 @@ import 'datatables.net-select-dt';
 import 'datatables.net-responsive-dt';
 import './custom.css';
 import { useDispatch, useSelector } from "react-redux";
-import { getDestinationDestailsForTable } from "../../actions/Destination/destinationAction";
+import { getDestinationDestailsForTable, deactivateDestination } from "../../actions/Destination/destinationAction";
+ 
 
 DataTable.use(DT);
 
@@ -24,27 +25,53 @@ const DestinationList = () => {
     }
   }, [destinationDetails]);
 
+  const handleDeactivate = async (id) => {
+    const confirmDeactivation = window.confirm("Are you sure you want to deactivate this destination?");
+    if (confirmDeactivation) {
+      await dispatch(deactivateDestination(id));
+      alert("Destination deactivated successfully");
+      window.location.reload();
+    }
+  };
+
   const columns = [
-  { title: "Entity", data: "entity" },
-  { title: "Name", data: "name" },
-  { title: "UUID", data: "uuid" },
-  { title: "Location", data: "location.name" },
-  { title: "Created At", data: "createdAt" },
-  { title: "Status", data: "isActive", render: data => data ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Inactive</span>' },
-  { title: "Action", data: null, render: (data, type, row) => `
-    <div style="display: flex; gap: 10px;">
-      <a href="/cancellation/${row.id}" style="color: blue;">
-        <i class="bi bi-eye"></i>
-      </a>
-      <button class="" style="color: green;">
-        <i class="bi bi-people"></i>
-      </button>
-      <button class="" style="color: red;">
-        <i class="ri-tools-fill"></i>
-      </button>
-    </div>
-  ` }
-];
+    { title: "Entity", data: "entity" },
+    { title: "Name", data: "name" },
+    { title: "UUID", data: "uuid" },
+    { title: "Location", data: "location.name" },
+    { title: "Created At", data: "createdAt" },
+    { title: "Status", data: "isActive", render: data => data ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Inactive</span>' },
+    { title: "Action", data: null, render: (data, type, row) => `
+      <div style="display: flex; gap: 10px;">
+        <a href="/cancellation/${row.id}" style="color: blue;">
+          <i class="bi bi-eye"></i>
+        </a>
+        <button class="deactivate-btn" data-id="${row.id}" style="color: red;">
+          <i class="ri-tools-fill"></i>
+        </button>
+      </div>
+    ` }
+  ];
+
+  useEffect(() => {
+    const handleDeactivateClick = (event) => {
+      const id = event.target.closest('.deactivate-btn')?.dataset?.id;
+      if (id) {
+        handleDeactivate(id);
+      }
+    };
+
+    const table = document.querySelector('.destination-list .dataTable');
+    if (table) {
+      table.addEventListener('click', handleDeactivateClick);
+    }
+
+    return () => {
+      if (table) {
+        table.removeEventListener('click', handleDeactivateClick);
+      }
+    };
+  }, [destinations]);
 
   return (
     <div className={`destination-list`}>

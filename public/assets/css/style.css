@@ -1297,4 +1297,8 @@ h6 {
   background-color: #dc3545;
 }
 
+.custom-toast-container {
+  z-index: 9999 !important;
+}
+
 

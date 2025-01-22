@@ -4,7 +4,11 @@ import { WEB_CLIENT } from "../../constants";
 import {
     DESTINATION_REQUEST,
     DESTINATION_SUCCESS,
-    DESTINATION_FAILURE
+    DESTINATION_FAILURE,
+    DEACTIVATE_DESTINATION_REQUEST,
+    DEACTIVATE_DESTINATION_SUCCESS,
+    DEACTIVATE_DESTINATION_FAILURE,
+
 
 }
 from '../types'
@@ -23,6 +27,20 @@ export const destinationSuccess = (data) =>({
 
 export const destinationFailure = (error) =>({
     type: DESTINATION_FAILURE,
+    payload: error,
+});
+
+export const deactivateDestinationRequest = () =>({
+    type: DEACTIVATE_DESTINATION_REQUEST,
+});
+
+export const deactivateDestinationSuccess = (data) =>({
+    type: DEACTIVATE_DESTINATION_SUCCESS,
+    payload: data,
+});
+
+export const deactivateDestinationFailure = (error) =>({
+    type: DEACTIVATE_DESTINATION_FAILURE,
     payload: error,
 });
 
@@ -85,6 +103,20 @@ export const getDestinationDestailsForTable = () => {
                 dispatch(destinationFailure(error.message));
             });
     };
+}
+
+
+export const deactivateDestination = (id) => {
+    return (dispatch) => {
+        dispatch(deactivateDestinationRequest());
+        axiosInstance.post(`${WEB_CLIENT}/admin-pannel-api/destination/deactivate-destination`, { id: id })
+            .then(response => {
+                dispatch(deactivateDestinationSuccess(response.data));
+            })
+            .catch(error => {
+                dispatch(deactivateDestinationFailure(error.message));
+            });
+    }
 }
 
 
