@@ -73,3 +73,18 @@ export const getDestinationCategory = () => {
 }
 
 
+export const getDestinationDestailsForTable = () => {
+    return (dispatch) => {
+        dispatch(destinationRequest());
+        axiosInstance.get(`${WEB_CLIENT}/admin-pannel-api/destination/view-upload-destination`)
+            .then(response => {
+                dispatch(destinationSuccess(response.data));
+                console.log(response.data);
+            })
+            .catch(error => {
+                dispatch(destinationFailure(error.message));
+            });
+    };
+}
+
+
