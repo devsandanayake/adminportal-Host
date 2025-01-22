@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.layout-flex{
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.header-cont{
+    position: relative;
+    z-index: 13000;
+}

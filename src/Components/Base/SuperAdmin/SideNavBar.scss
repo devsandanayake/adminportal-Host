@@ -1,0 +1,21 @@
+.s-admin-sidebar{
+  box-shadow: 0 2px 20px rgba(0,0,0,0.35) !important;
+  position: inherit !important;
+  width: auto !important;
+  .nav-link{
+    flex-direction: column !important;
+    padding: 0 !important;
+    margin-bottom: 1rem !important;
+    i{
+      margin: 0 !important;
+      font-size: 2em !important;
+    }
+    p{
+      font-size: x-small !important;
+    }
+  }
+
+  #header{
+    box-shadow: 0 2px 20px rgba(0,0,0,0.35) !important;
+  }
+}

@@ -11,7 +11,8 @@ import AddNewRegistrationComponent from "./Components/Destination/DestinationReg
 import CancellationTable from './Components/Dashboard/Cancellation/CancellationTable';
 import EntityView from './Components/Entity/EntityView';
 import TicketInsert from './Components/Ticket/TicketInsert/TicketInsert';
-
+import SuperAdminLayout from "./SuperAdminLayout";
+import EntityList from "./Components/Base/SuperAdmin/Entity/EntityList";
  
 
 
@@ -30,7 +31,7 @@ function App() {
   }
   return (
     <Router>
-      <Layout>
+       <SuperAdminLayout>
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path='/entityRegistartion' element={<EntityRegistration />} />
@@ -38,10 +39,10 @@ function App() {
         <Route path='/destinationRegistartion' element={<DestinationRegistration />} />
         <Route path='/add-new-destination' element={<AddNewRegistrationComponent />} />
         <Route path='/cancellation' element={<CancellationTable />} />
-        <Route path='/entityView' element={<EntityView />} />
+        <Route path='/entity/list' element={<EntityList />} />
         <Route path='/ticketInsert' element={<TicketInsert />} />
       </Routes>
-      </Layout>
+      </SuperAdminLayout>
     </Router>
     
   );
