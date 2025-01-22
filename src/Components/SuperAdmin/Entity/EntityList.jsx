@@ -1,7 +1,7 @@
 import React from 'react';
 import './EntityList.scss'
 import DataTable from "datatables.net-react";
-import sampleData from "../../../Entity/sampleData.json";
+import sampleData from "../../Entity/sampleData.json";
 
 export default function EntityList() {
 

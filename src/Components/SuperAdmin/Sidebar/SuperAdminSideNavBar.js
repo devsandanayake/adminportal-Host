@@ -72,7 +72,7 @@ export default function SuperAdminSideNavbar() {
                 </li>
 
                 <li className="nav-item">
-                  <Link className="nav-link collapsed" to="/ticketInsert">
+                  <Link className="nav-link collapsed" to="/destinations">
                     <i className="bi bi-ticket-detailed"></i>
                     <p>Tickets</p>
                   </Link>

@@ -11,9 +11,8 @@ import AddNewRegistrationComponent from "./Components/Destination/DestinationReg
 import CancellationTable from './Components/Dashboard/Cancellation/CancellationTable';
 import EntityView from './Components/Entity/EntityView';
 import TicketInsert from './Components/Ticket/TicketInsert/TicketInsert';
-import SuperAdminLayout from "./SuperAdminLayout";
-import EntityList from "./Components/Base/SuperAdmin/Entity/EntityList";
- 
+import SuperAdminLayout from "./Components/SuperAdmin/Layout/SuperAdminLayout";
+import EntityList from "./Components/SuperAdmin/Entity/EntityList";
 
 
 function App() {
