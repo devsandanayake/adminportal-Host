@@ -13,6 +13,7 @@ import EntityView from './Components/Entity/EntityView';
 import TicketInsert from './Components/Ticket/TicketInsert/TicketInsert';
 import SuperAdminLayout from "./Components/SuperAdmin/Layout/SuperAdminLayout";
 import EntityList from "./Components/SuperAdmin/Entity/EntityList";
+import UpdatePage from './Components/Destination/DestinationUpdate/UpdatePage';
 
 
 function App() {
@@ -40,6 +41,10 @@ function App() {
         <Route path='/cancellation' element={<CancellationTable />} />
         <Route path='/entity/list' element={<EntityList />} />
         <Route path='/ticketInsert' element={<TicketInsert />} />
+
+        {/*DESTINATION-PAGES ROUTES*/}
+        <Route path='/destination/:id' element={<UpdatePage />} />
+
       </Routes>
       </SuperAdminLayout>
     </Router>

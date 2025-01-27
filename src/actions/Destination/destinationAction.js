@@ -1,5 +1,5 @@
 import axiosInstance from "../../axiosConfig";
-import { WEB_CLIENT } from "../../constants";
+import { HOST, WEB_CLIENT , USER_CLIENT_OPEN} from "../../constants";
 
 import {
     DESTINATION_REQUEST,
@@ -8,8 +8,12 @@ import {
     DEACTIVATE_DESTINATION_REQUEST,
     DEACTIVATE_DESTINATION_SUCCESS,
     DEACTIVATE_DESTINATION_FAILURE,
-
-
+    DESTINATION__BYID_REQUEST,
+    DESTINATION__BYID_SUCCESS,
+    DESTINATION__BYID_FAILURE,
+    DESTINATION_UPDATE_REQUEST,
+    DESTINATION_UPDATE_SUCCESS,
+    DESTINATION_UPDATE_FAILURE
 }
 from '../types'
 
@@ -43,6 +47,57 @@ export const deactivateDestinationFailure = (error) =>({
     type: DEACTIVATE_DESTINATION_FAILURE,
     payload: error,
 });
+
+export const destinationByIDRequest = () =>({
+    type: DESTINATION__BYID_REQUEST,
+});
+
+export const destinationByIDSuccess = (data) =>({
+    type: DESTINATION__BYID_SUCCESS,
+    payload: data,
+});
+
+export const destinationByIDFailure = (error) =>({
+    type: DESTINATION__BYID_FAILURE,
+    payload: error,
+});
+
+//DESTINATION UPDATE
+export const destinationUpdateRequest = () =>({
+    type: DESTINATION_UPDATE_REQUEST,
+});
+
+export const destinationUpdateSuccess = (data) =>({
+    type: DESTINATION_UPDATE_SUCCESS,
+    payload: data,
+});
+
+export const destinationUpdateFailure = (error) =>({
+    type: DESTINATION_UPDATE_FAILURE,
+    payload: error,
+});
+
+
+
+export const viewDestionationById = (id) => {
+    return (dispatch) => {
+        dispatch(destinationByIDRequest());
+        axiosInstance.get(`${HOST}/${USER_CLIENT_OPEN}/destination/details`, {
+            params: {
+                destinationCode: id,
+                isUserReviewsInclude: true,
+                isReviewTagsInclude: true,
+                isTagsInclude: true
+            }
+        })
+        .then(response => {
+            dispatch(destinationByIDSuccess(response.data));
+        })
+        .catch(error => {
+            dispatch(destinationByIDFailure(error.message));
+        });
+    };
+}
 
 
 
@@ -115,6 +170,22 @@ export const deactivateDestination = (id) => {
             })
             .catch(error => {
                 dispatch(deactivateDestinationFailure(error.message));
+            });
+    }
+}
+
+//DESTINATION UPDATE
+export const updateDestination = (destination) => {
+    return (dispatch) => {
+        dispatch(destinationUpdateRequest());
+        axiosInstance.put(`${WEB_CLIENT}/destination-panel/update/update-destination`, destination)
+            .then(response => {
+                dispatch(destinationUpdateSuccess(response.data));
+                alert("Destination updated successfully");
+                window.location.reload();
+            })
+            .catch(error => {
+                dispatch(destinationUpdateFailure(error.message));
             });
     }
 }

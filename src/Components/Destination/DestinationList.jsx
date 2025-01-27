@@ -43,7 +43,7 @@ const DestinationList = () => {
     { title: "Status", data: "isActive", render: data => data ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Inactive</span>' },
     { title: "Action", data: null, render: (data, type, row) => `
       <div style="display: flex; gap: 10px;">
-        <a href="/cancellation/${row.id}" style="color: blue;">
+        <a href="/destination/${row.uuid}" style="color: blue;">
           <i class="bi bi-eye"></i>
         </a>
         <button class="deactivate-btn" data-id="${row.id}" style="color: red;">
