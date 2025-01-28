@@ -178,11 +178,11 @@ export const deactivateDestination = (id) => {
 export const updateDestination = (destination) => {
     return (dispatch) => {
         dispatch(destinationUpdateRequest());
-        axiosInstance.put(`${WEB_CLIENT}/destination-panel/update/update-destination`, destination)
+        axiosInstance.post(`${WEB_CLIENT}/destination-panel/update/update-destination`, destination)
             .then(response => {
                 dispatch(destinationUpdateSuccess(response.data));
                 alert("Destination updated successfully");
-                window.location.reload();
+                
             })
             .catch(error => {
                 dispatch(destinationUpdateFailure(error.message));

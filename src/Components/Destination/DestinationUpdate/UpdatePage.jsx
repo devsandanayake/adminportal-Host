@@ -11,13 +11,17 @@ export default function UpdatePage() {
   const [editMode, setEditMode] = useState({});
   const [formData, setFormData] = useState({});
   const [isEditing, setIsEditing] = useState(false);
+
   useEffect(() => {
     dispatch(viewDestionationById(id));
   }, [dispatch, id]);
 
   useEffect(() => {
     if (destinationDetails.data?.result?.destination) {
-      setFormData(destinationDetails.data.result.destination);
+      setFormData({
+        ...destinationDetails.data.result.destination,
+        destinationImages: destinationDetails.data.result.destination.destinationImages || []
+      });
     }
   }, [destinationDetails]);
 
@@ -41,14 +45,52 @@ export default function UpdatePage() {
     }
   };
 
-  const handleConfirm = () => {
-    const updatedData = {
-        id: formData.id,
-        name: formData.name,
-        description: formData.description,
-        overview: formData.details.overview,
-        highlight: formData.details.highlight
+  const handleImageChange = (index, file) => {
+    const updatedImages = [...formData.destinationImages];
+    if (!updatedImages[index]) {
+      updatedImages[index] = {
+        displayOrder: index + 1,
+        validFrom: '2024-12-30 12:23:12',
+        validTill: '2026-12-30 12:23:12',
+        aspDivWidth: '16',
+        aspDivHeight: '9'
+      };
+    }
+    
+    updatedImages[index] = {
+      ...updatedImages[index],
+      imageFile: file,
+      webImgPath: URL.createObjectURL(file), // Update the preview
+      displayOrder: updatedImages[index].displayOrder || index + 1,
+      mobileImageFile: file,
+      validFrom: updatedImages[index].validFrom || '',
+      validTill: updatedImages[index].validTill || '',
+      aspDivWidth: updatedImages[index].aspDivWidth || '',
+      aspDivHeight: updatedImages[index].aspDivHeight || ''
     };
+    setFormData({ ...formData, destinationImages: updatedImages });
+  };
+
+  const handleConfirm = () => {
+    const updatedData = new FormData();
+    updatedData.append('id', formData.id);
+    updatedData.append('name', formData.name);
+    updatedData.append('description', formData.description);
+    updatedData.append('overview', formData.details.overview);
+    updatedData.append('highlight', formData.details.highlight);
+
+    if (formData.destinationImages) {
+      formData.destinationImages.forEach((image, index) => {
+        updatedData.append(`destinationImages[${index}][displayOrder]`, image.displayOrder);
+        updatedData.append(`destinationImages[${index}][imageFile]`, image.imageFile);
+        updatedData.append(`destinationImages[${index}][mobileImageFile]`, image.mobileImageFile);
+        updatedData.append(`destinationImages[${index}][validFrom]`, image.validFrom);
+        updatedData.append(`destinationImages[${index}][validTill]`, image.validTill);
+        updatedData.append(`destinationImages[${index}][aspDivWidth]`, image.aspDivWidth);
+        updatedData.append(`destinationImages[${index}][aspDivHeight]`, image.aspDivHeight);
+      });
+    }
+
     console.log("Updated Data:", updatedData);
     dispatch(updateDestination(updatedData));
   };
@@ -277,11 +319,65 @@ export default function UpdatePage() {
             <h3 className="text-xl font-semibold mb-2">Images</h3>
             <div className="grid grid-cols-3 gap-4">
               {destination.images && destination.images.map((image, index) => (
-                <img key={index} src={`${HOST}/${image.webImgPath}`} alt={image.webImgName} className="w-full h-auto rounded" />
+                <div key={index}>
+                  {editMode[`image_${index}`] ? (
+                    <>
+                      <input
+                        type="file"
+                        onChange={(e) => handleImageChange(index, e.target.files[0])}
+                        className="border p-1 rounded w-full mb-2"
+                      />
+                     <input
+                        type="file"
+                        onChange={(e) => handleImageChange(index, e.target.files[0], true)}
+                        className="border p-1 rounded w-full mb-2"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Display Order"
+                        value={image.displayOrder || index + 1}
+                        onChange={(e) => handleChange(`destinationImages[${index}].displayOrder`, e.target.value)}
+                        className="border p-1 rounded w-full mb-2"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Valid From"
+                        value={'2024-12-30 12:23:12'}
+                        onChange={(e) => handleChange(`destinationImages[${index}].validFrom`, e.target.value)}
+                        className="border p-1 rounded w-full mb-2"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Valid Till"
+                        value={'2025-12-30 12:23:12'}
+                        onChange={(e) => handleChange(`destinationImages[${index}].validTill`, e.target.value)}
+                        className="border p-1 rounded w-full mb-2"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Aspect Ratio Width"
+                        value={'16'}
+                        onChange={(e) => handleChange(`destinationImages[${index}].aspDivWidth`, e.target.value)}
+                        className="border p-1 rounded w-full mb-2"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Aspect Ratio Height"
+                        value={'9'}
+                        onChange={(e) => handleChange(`destinationImages[${index}].aspDivHeight`, e.target.value)}
+                        className="border p-1 rounded w-full mb-2"
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <img src={`${HOST}/${image.webImgPath}`} alt={image.webImgName} className="w-full h-auto rounded" />
+                      <button onClick={() => handleDoubleClick(`image_${index}`)} className="text-blue-500">Edit</button>
+                    </>
+                  )}
+                </div>
               ))}
             </div>
           </div>
-          
         </div>
       )}
     </div>
