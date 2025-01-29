@@ -100,7 +100,7 @@ export default function SuperAdminSideNavbar() {
                 </li>
 
                 <li className="nav-item">
-                  <Link className="nav-link collapsed" to="/destinations">
+                  <Link className="nav-link collapsed" to="/configdashboard">
                     <i className="bi bi-gear"></i>
                     <p>Configs</p>
                   </Link>

@@ -14,6 +14,7 @@ import TicketInsert from './Components/Ticket/TicketInsert/TicketInsert';
 import SuperAdminLayout from "./Components/SuperAdmin/Layout/SuperAdminLayout";
 import EntityList from "./Components/SuperAdmin/Entity/EntityList";
 import UpdatePage from './Components/Destination/DestinationUpdate/UpdatePage';
+import ConfigDashboard from "./Components/Meta/Configdashboard";
 
 
 function App() {
@@ -44,6 +45,9 @@ function App() {
 
         {/*DESTINATION-PAGES ROUTES*/}
         <Route path='/destination/:id' element={<UpdatePage />} />
+
+        {/*META-PAGES ROUTES*/}
+        <Route path='/configdashboard' element={<ConfigDashboard />} />
 
       </Routes>
       </SuperAdminLayout>
