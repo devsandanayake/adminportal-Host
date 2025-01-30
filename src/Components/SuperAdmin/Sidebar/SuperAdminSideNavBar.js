@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutUser } from '../../../actions/authAction';
-import { Link } from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import './SideNavBar.scss'
 
 export default function SuperAdminSideNavbar() {
@@ -11,6 +11,8 @@ export default function SuperAdminSideNavbar() {
   const [inquiryCount, setInquiryCount] = useState(0);
   const [showAuctionSubItems, setShowAuctionSubItems] = useState(false);
   const [showinqurySubItems, setShowinqurySubItems] = useState(false);
+
+  const location = useLocation();
 
   const handleLogout = () => {
     dispatch(logoutUser());
@@ -58,21 +60,21 @@ export default function SuperAdminSideNavbar() {
                 </li>
 
                 <li className="nav-item mt-2">
-                  <Link className="nav-link collapsed" to="/entity/list">
+                  <Link className={`nav-link collapsed ${['/entity/list', '/entity/new-registration'].indexOf(location.pathname) > -1 ? 'active':''}`} to="/entity/list">
                     <i className="bi bi-bank"></i>
                     <p>Entities</p>
                   </Link>
                 </li>
 
                 <li className="nav-item">
-                  <Link className="nav-link collapsed" to="/destinations">
+                  <Link className={`nav-link collapsed ${['/destinations', '/destinations/new-registration'].indexOf(location.pathname) > -1 ? 'active':''}`} to="/destinations">
                     <i className="bi bi-signpost-2"></i>
                     <p>Destinations</p>
                   </Link>
                 </li>
 
                 <li className="nav-item">
-                  <Link className="nav-link collapsed" to="/ticketInsert">
+                  <Link className={`nav-link collapsed ${['/tickets/destination-tickets', '/tickets/destination-tickets/new-registration'].indexOf(location.pathname) > -1 ? 'active':''}`} to="/tickets/destination-tickets">
                     <i className="bi bi-ticket-detailed"></i>
                     <p>Tickets</p>
                   </Link>

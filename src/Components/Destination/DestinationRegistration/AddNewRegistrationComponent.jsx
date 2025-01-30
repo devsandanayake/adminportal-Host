@@ -4,7 +4,7 @@ import 'react-select2-wrapper/css/select2.css';
 import './custom.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
-import DestinationImageComponent from "./DestinationImageComponent";
+import DestinationImageComponent from "../Registration/DestinationImageComponent";
 
 class AddNewRegistrationComponent extends Component
 {

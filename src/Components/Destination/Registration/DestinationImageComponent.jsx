@@ -9,22 +9,30 @@ class DestinationImageComponent extends Component {
         super(props);
         this.state = {
             formData : {
-                owningEntityCode: "",
-                owningEntityBranchCode: "",
-                name: "",
-                displayName: "",
-                description: "",
-                overview: "",
-                highlight: "",
-                tagCodes: [],
+                asp: "",
+                aspDivWidth: "",
+                aspDivHeight: "",
+                validFrom: "",
+                validTill: "",
+                imageFile: null,
+                mobileImageFile: null,
             }
         }
         this.handleInputChange = this.handleInputChange.bind(this)
     }
 
+    handleFileChange = (event, type) => {
+        if (event.target.files.length > 0) {
+            let file = event.target.files[0]
+            this.setState({ [type]: file });
+            this.props.onChange(this.props.index, type, file)
+        }
+    };
+
     handleInputChange = (e) => {
         const { name, value } = e.target;
         this.setState({formData : { ...this.state.formData, [name]: value }});
+        this.props.onChange(this.props.index, name, value)
     };
 
     render() {
@@ -34,15 +42,25 @@ class DestinationImageComponent extends Component {
                     <div className="form-group mb-0">
                         <label className={`mb-1`} htmlFor="region2">Aspect Ratio</label>
                         <br/>
-                        <Select2 className={`w-100 form-control mt-2`}
+                        <Select2 value={this.state.asp}
+                                 onChange={(e)=>{
+                                     let val = e.target.value
+                                     let vals = val.split('|')
+                                     if(vals.length > 1) {
+                                         this.setState({asp:val, aspDivWidth : vals[0], aspDivHeight:vals[1]})
+                                         this.props.onChange(this.props.index, 'aspDivWidth', vals[0])
+                                         this.props.onChange(this.props.index, 'aspDivHeight', vals[1])
+                                     }
+                                 }}
+                                 className={`w-100 form-control mt-2`}
                                  data={[
-                                     {text: 'bug', id: 1},
-                                     {text: 'feature', id: 2},
-                                     {text: 'documents', id: 3},
-                                     {text: 'discussion', id: 4},
+                                     {text: '16:9', id: "16|9"},
+                                     {text: '1:2', id: "1|2"},
+                                     {text: '3:4', id: "3|4"},
+                                     {text: '2:1', id: "2|1"},
                                  ]}
                                  options={{
-                                     placeholder: 'Select one entity',
+                                     placeholder: 'Select one ratio (width:height)',
                                  }}
                         />
                     </div>
@@ -50,7 +68,7 @@ class DestinationImageComponent extends Component {
                 <div className={`col-2`}>
                     <div className="form-group mb-0">
                         <label htmlFor="region2">Display Order</label>
-                        <input name={`name`} value={this.state.formData.name}
+                        <input name={`displayOrder`} value={this.state.displayOrder}
                                onChange={this.handleInputChange}
                                className="form-control f-sm  mt-1 region-select r-name"/>
                     </div>
@@ -58,7 +76,7 @@ class DestinationImageComponent extends Component {
                 <div className={`col-4`}>
                     <div className="form-group mb-0">
                         <label htmlFor="region2">Valid From</label>
-                        <input name={`name`} value={this.state.formData.name}
+                        <input name={`validFrom`} value={this.state.validFrom}
                                onChange={this.handleInputChange} type={"datetime-local"}
                                className="form-control f-sm  mt-1 region-select r-name"/>
                     </div>
@@ -66,7 +84,7 @@ class DestinationImageComponent extends Component {
                 <div className={`col-4`}>
                     <div className="form-group mb-0">
                         <label htmlFor="region2">Valid Till</label>
-                        <input name={`name`} value={this.state.formData.name}
+                        <input name={`validTill`} value={this.state.validTill}
                                onChange={this.handleInputChange} type={"datetime-local"}
                                className="form-control f-sm  mt-1 region-select r-name"/>
                     </div>
@@ -76,17 +94,13 @@ class DestinationImageComponent extends Component {
                 <div className={`col-6`}>
                     <div className="form-group mb-0">
                         <label htmlFor="region2">Web Image</label>
-                        <input name={`name`} value={this.state.formData.displayName}
-                               onChange={this.handleInputChange} type={`file`}
-                               className="form-control f-sm  mt-1 region-select r-name"/>
+                        <input onChange={(e)=>{this.handleFileChange(e, 'imageFile')}} type={`file`} className="form-control f-sm  mt-1 img-file region-select r-name"/>
                     </div>
                 </div>
                 <div className={`col-4`}>
                     <div className="form-group mb-0">
                         <label htmlFor="region2">Mobile Image</label>
-                        <input name={`name`} value={this.state.formData.description}
-                               onChange={this.handleInputChange} type={`file`}
-                               className="form-control f-sm  mt-1 region-select r-name"/>
+                        <input onChange={(e)=>{this.handleFileChange(e, 'mobileImageFile')}} type={`file`} className="form-control f-sm  mt-1 mob-img-file region-select r-name"/>
                     </div>
                 </div>
                 <div className={`col-2`}>
