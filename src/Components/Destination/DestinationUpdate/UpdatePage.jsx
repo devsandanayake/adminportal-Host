@@ -47,27 +47,34 @@ export default function UpdatePage() {
 
   const handleImageChange = (index, file) => {
     const updatedImages = [...formData.destinationImages];
+  
+    // If the image at the given index does not exist, create it
     if (!updatedImages[index]) {
       updatedImages[index] = {
         displayOrder: index + 1,
         validFrom: '2024-12-30 12:23:12',
         validTill: '2026-12-30 12:23:12',
         aspDivWidth: '16',
-        aspDivHeight: '9'
+        aspDivHeight: '9',
+        imageFile: file,
+        webImgPath: URL.createObjectURL(file), // Update the preview
+        mobileImageFile: file,
+      };
+    } else {
+      // Update the existing image at the index
+      updatedImages[index] = {
+        ...updatedImages[index],
+        imageFile: file,
+        webImgPath: URL.createObjectURL(file), // Update preview
+        mobileImageFile: file,
       };
     }
-    
-    updatedImages[index] = {
-      ...updatedImages[index],
-      imageFile: file,
-      webImgPath: URL.createObjectURL(file), // Update the preview
-      displayOrder: updatedImages[index].displayOrder || index + 1,
-      mobileImageFile: file,
-      validFrom: updatedImages[index].validFrom || '',
-      validTill: updatedImages[index].validTill || '',
-      aspDivWidth: updatedImages[index].aspDivWidth || '',
-      aspDivHeight: updatedImages[index].aspDivHeight || ''
-    };
+  
+    // If the image is still undefined, remove it from the array
+    if (!updatedImages[index].imageFile) {
+      updatedImages[index] = undefined;
+    }
+  
     setFormData({ ...formData, destinationImages: updatedImages });
   };
 
@@ -78,19 +85,22 @@ export default function UpdatePage() {
     updatedData.append('description', formData.description);
     updatedData.append('overview', formData.details.overview);
     updatedData.append('highlight', formData.details.highlight);
-
+  
+    // Only append images that have valid data (i.e., imageFile exists and image is not undefined)
     if (formData.destinationImages) {
       formData.destinationImages.forEach((image, index) => {
-        updatedData.append(`destinationImages[${index}][displayOrder]`, image.displayOrder);
-        updatedData.append(`destinationImages[${index}][imageFile]`, image.imageFile);
-        updatedData.append(`destinationImages[${index}][mobileImageFile]`, image.mobileImageFile);
-        updatedData.append(`destinationImages[${index}][validFrom]`, image.validFrom);
-        updatedData.append(`destinationImages[${index}][validTill]`, image.validTill);
-        updatedData.append(`destinationImages[${index}][aspDivWidth]`, image.aspDivWidth);
-        updatedData.append(`destinationImages[${index}][aspDivHeight]`, image.aspDivHeight);
+        if (image && image.imageFile) {  // Ensure image is not undefined and has imageFile
+          updatedData.append(`destinationImages[${index}][displayOrder]`, image.displayOrder);
+          updatedData.append(`destinationImages[${index}][imageFile]`, image.imageFile);
+          updatedData.append(`destinationImages[${index}][mobileImageFile]`, image.mobileImageFile);
+          updatedData.append(`destinationImages[${index}][validFrom]`, image.validFrom);
+          updatedData.append(`destinationImages[${index}][validTill]`, image.validTill);
+          updatedData.append(`destinationImages[${index}][aspDivWidth]`, image.aspDivWidth);
+          updatedData.append(`destinationImages[${index}][aspDivHeight]`, image.aspDivHeight);
+        }
       });
     }
-
+  
     console.log("Updated Data:", updatedData);
     dispatch(updateDestination(updatedData));
   };
@@ -115,6 +125,13 @@ export default function UpdatePage() {
   }
 
   const destination = formData;
+  console.log('destination.images:', destination.images);
+  
+  const sortedImages = Array.isArray(destination.images) 
+      ? destination.images.sort((a, b) => a.displayOrder - b.displayOrder) 
+      : [];
+  
+  console.log('sortedImages:', sortedImages);
 
   return (
     <div className="container mx-auto p-4">
@@ -315,10 +332,10 @@ export default function UpdatePage() {
               destination.tags ? destination.tags.map(tag => tag.name).join(', ') : ''
             )}
           </p>
-          <div className="mt-4">
+                 <div className="mt-4">
             <h3 className="text-xl font-semibold mb-2">Images</h3>
             <div className="grid grid-cols-3 gap-4">
-              {destination.images && destination.images.map((image, index) => (
+              {sortedImages && sortedImages.map((image, index) => (
                 <div key={index}>
                   {editMode[`image_${index}`] ? (
                     <>
@@ -327,7 +344,7 @@ export default function UpdatePage() {
                         onChange={(e) => handleImageChange(index, e.target.files[0])}
                         className="border p-1 rounded w-full mb-2"
                       />
-                     <input
+                      <input
                         type="file"
                         onChange={(e) => handleImageChange(index, e.target.files[0], true)}
                         className="border p-1 rounded w-full mb-2"
@@ -369,10 +386,13 @@ export default function UpdatePage() {
                       />
                     </>
                   ) : (
-                    <>
+                    <div className="relative">
                       <img src={`${HOST}/${image.webImgPath}`} alt={image.webImgName} className="w-full h-auto rounded" />
+                      <span className="absolute top-0 left-0 bg-gray-800 text-white text-xs px-2 py-1 rounded">
+                        Order ID: {image.displayOrder}
+                      </span>
                       <button onClick={() => handleDoubleClick(`image_${index}`)} className="text-blue-500">Edit</button>
-                    </>
+                    </div>
                   )}
                 </div>
               ))}
