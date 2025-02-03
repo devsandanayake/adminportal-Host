@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { viewDestionationById , updateDestination } from "../../../actions/Destination/destinationAction";
 import { HOST } from '../../../constants';
+import DeactivateButton from '../DeactivateButton';
 
 export default function UpdatePage() {
   const { id } = useParams();
@@ -166,6 +167,7 @@ export default function UpdatePage() {
               destination.name
             )}
           </h2>
+          <DeactivateButton id={destination.id} />
           <p className="text-gray-700 mb-2" onDoubleClick={() => handleDoubleClick('Category')}>
             <strong>Category:</strong>{' '}
             {editMode.Category ? (
