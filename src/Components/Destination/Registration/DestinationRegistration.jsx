@@ -315,6 +315,7 @@ class DestinationRegistration extends Component
             if(response.status === 200 && response.data && response.data.status){
                 $(`.back-nav`).click()
                 console.log($(`.back-nav`).click());
+                alert("Destination registered successfully")
             }
         }, (error) => {
             if(axios.isCancel(error)){
