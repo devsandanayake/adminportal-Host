@@ -62,7 +62,7 @@ export default function SuperAdminSideNavbar() {
                 <li className="nav-item mt-2">
                   <Link className={`nav-link collapsed ${['/entity/list', '/entity/new-registration'].indexOf(location.pathname) > -1 ? 'active':''}`} to="/entity/list">
                     <i className="bi bi-bank"></i>
-                    <p>Entities</p>
+                    <p>Merchants</p>
                   </Link>
                 </li>
 
