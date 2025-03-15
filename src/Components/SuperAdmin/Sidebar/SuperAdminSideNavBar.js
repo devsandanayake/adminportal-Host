@@ -88,6 +88,13 @@ export default function SuperAdminSideNavbar() {
                 </li>
 
                 <li className="nav-item">
+                  <Link className="nav-link collapsed" to="/references">
+                    <i className="bi bi-people"></i>
+                    <p>References</p>
+                  </Link>
+                </li>
+
+                <li className="nav-item">
                   <Link className="nav-link collapsed" to="/destinations">
                     <i className="bi bi-paint-bucket"></i>
                     <p>CMS</p>
